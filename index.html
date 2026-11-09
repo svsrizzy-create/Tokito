@@ -1,343 +1,401 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOKITO | Galaxy Profile</title>
+<meta name="theme-color" content="#10051f">
+<title>TOKITO X | Script Roblox</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+ min-height:100vh;
+ font-family:'Segoe UI',Arial,sans-serif;
+ color:white;
+ background:
+ radial-gradient(ellipse at 50% 0%,#38105e,transparent 48%),
+ radial-gradient(ellipse at 90% 70%,#260747,transparent 40%),
+ linear-gradient(150deg,#080313,#10051f,#03020a);
+ overflow-x:hidden;
 }
 
-:root {
-  --purple: #a855f7;
-  --light: #d8a7ff;
+#stars{
+ position:fixed;
+ inset:0;
+ width:100%;
+ height:100%;
+ pointer-events:none;
+ z-index:0;
 }
 
-body {
-  min-height: 100vh;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  color: white;
-  background:
-    radial-gradient(ellipse at 50% 0%, #38105e, transparent 48%),
-    radial-gradient(ellipse at 90% 70%, #260747, transparent 40%),
-    linear-gradient(150deg, #080313, #10051f, #03020a);
-  overflow-x: hidden;
+.nebula{
+ position:fixed;
+ width:280px;
+ height:280px;
+ border-radius:50%;
+ filter:blur(90px);
+ opacity:.25;
+ pointer-events:none;
+ z-index:0;
+ animation:nebula 9s ease-in-out infinite alternate;
 }
 
-/* STAR BACKGROUND */
-#stars {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
+.n1{background:#a020ff;top:5%;left:-140px}
+.n2{background:#5714c9;right:-140px;top:55%;animation-delay:3s}
+
+@keyframes nebula{
+ to{transform:translate(40px,60px) scale(1.3)}
 }
 
-/* NEBULA */
-.nebula {
-  position: fixed;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: .25;
-  pointer-events: none;
-  z-index: 0;
-  animation: nebula 9s ease-in-out infinite alternate;
+.shooting{
+ position:fixed;
+ top:10%;
+ left:-120px;
+ width:110px;
+ height:2px;
+ background:linear-gradient(90deg,transparent,white,#bd6aff);
+ box-shadow:0 0 15px #b95cff;
+ transform:rotate(-35deg);
+ animation:shooting 5s linear infinite;
+ z-index:1;
 }
 
-.n1 {
-  background: #a020ff;
-  top: 5%;
-  left: -140px;
+@keyframes shooting{
+ 0%{left:-120px;top:10%;opacity:0}
+ 10%{opacity:1}
+ 40%{left:120%;top:55%;opacity:0}
+ 100%{left:120%;opacity:0}
 }
 
-.n2 {
-  background: #5714c9;
-  right: -140px;
-  top: 55%;
-  animation-delay: 3s;
+.container{
+ position:relative;
+ z-index:2;
+ width:calc(100% - 30px);
+ max-width:430px;
+ margin:45px auto 35px;
+ padding:28px 20px;
+ text-align:center;
+ background:rgba(15,5,30,.78);
+ border:1px solid #be78ff55;
+ border-radius:25px;
+ box-shadow:0 0 30px #8428ce22,inset 0 0 30px #a855f710;
+ backdrop-filter:blur(15px);
+ animation:entrance 1s ease both;
 }
 
-@keyframes nebula {
-  to {
-    transform: translate(40px,60px) scale(1.3);
-  }
+@keyframes entrance{
+ from{opacity:0;transform:translateY(35px) scale(.96)}
+ to{opacity:1;transform:translateY(0) scale(1)}
 }
 
-/* SHOOTING STAR */
-.shooting {
-  position: fixed;
-  top: 10%;
-  left: -120px;
-  width: 110px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, white, #bd6aff);
-  box-shadow: 0 0 15px #b95cff;
-  transform: rotate(-35deg);
-  animation: shooting 5s linear infinite;
-  z-index: 1;
+.profile-box{
+ position:relative;
+ width:125px;
+ height:125px;
+ margin:auto;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ animation:float 4s ease-in-out infinite;
 }
 
-@keyframes shooting {
-  0% { left: -120px; top: 10%; opacity: 0; }
-  10% { opacity: 1; }
-  40% { left: 120%; top: 55%; opacity: 0; }
-  100% { left: 120%; opacity: 0; }
+.profile-box:before{
+ content:"";
+ position:absolute;
+ inset:-8px;
+ border-radius:50%;
+ border:2px dashed #b65aff;
+ animation:rotate 12s linear infinite;
 }
 
-/* CONTAINER */
-.container {
-  position: relative;
-  z-index: 2;
-  width: calc(100% - 30px);
-  max-width: 420px;
-  margin: 55px auto 35px;
-  padding: 30px 22px;
-  text-align: center;
-  background: rgba(15,5,30,.68);
-  border: 1px solid rgba(190,120,255,.3);
-  border-radius: 25px;
-  box-shadow:
-    0 0 30px #8428ce22,
-    inset 0 0 30px #a855f710;
-  backdrop-filter: blur(15px);
-  animation: entrance 1s ease both;
+.profile-box:after{
+ content:"";
+ position:absolute;
+ inset:-15px;
+ border-radius:50%;
+ border:1px solid #a855f755;
+ animation:pulse 2.5s ease-in-out infinite;
 }
 
-@keyframes entrance {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.profile{
+ width:108px;
+ height:108px;
+ border-radius:50%;
+ object-fit:cover;
+ border:3px solid #c084fc;
+ box-shadow:0 0 25px #a855f7;
 }
 
-/* PROFILE */
-.profile-box {
-  position: relative;
-  width: 130px;
-  height: 130px;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: float 4s ease-in-out infinite;
+@keyframes float{50%{transform:translateY(-9px)}}
+@keyframes rotate{to{transform:rotate(360deg)}}
+@keyframes pulse{
+ 0%,100%{transform:scale(.95);opacity:.3}
+ 50%{transform:scale(1.12);opacity:1}
 }
 
-.profile-box::before {
-  content: "";
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  border: 2px dashed #b65aff;
-  animation: rotate 12s linear infinite;
+/* ANIMASI NAMA */
+.name-area{
+ margin-top:27px;
+ min-height:65px;
 }
 
-.profile-box::after {
-  content: "";
-  position: absolute;
-  inset: -15px;
-  border-radius: 50%;
-  border: 1px solid #a855f755;
-  animation: pulse 2.5s ease-in-out infinite;
+.name{
+ display:inline-block;
+ color:#fff;
+ font-size:25px;
+ font-weight:900;
+ letter-spacing:2px;
+ text-shadow:0 0 10px #c084fc,0 0 25px #a855f7;
+ overflow-wrap:anywhere;
 }
 
-.profile {
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #c084fc;
-  box-shadow: 0 0 25px #a855f7;
+.cursor{
+ display:inline-block;
+ color:#00f7ff;
+ font-size:30px;
+ font-weight:bold;
+ margin-left:3px;
+ animation:blink .65s steps(2,start) infinite;
+ text-shadow:0 0 12px #00f7ff;
 }
 
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes blink{to{visibility:hidden}}
+
+.subtitle{
+ font-size:9px;
+ letter-spacing:4px;
+ color:#d8a7ff;
+ margin-top:9px;
+ text-shadow:0 0 10px #a855f7;
 }
 
-@keyframes rotate {
-  to { transform: rotate(360deg); }
+.bio{
+ margin-top:15px;
+ color:#c8b6df;
+ font-size:13px;
+ line-height:1.8;
 }
 
-@keyframes pulse {
-  0%,100% {
-    transform: scale(.95);
-    opacity: .3;
-  }
-  50% {
-    transform: scale(1.12);
-    opacity: 1;
-  }
+.line{
+ height:1px;
+ margin:25px 0;
+ background:linear-gradient(90deg,transparent,#bd70ff,transparent);
+ box-shadow:0 0 10px #a855f7;
 }
 
-/* NAME */
-h1 {
-  margin-top: 24px;
-  font-size: 32px;
-  letter-spacing: 5px;
-  text-shadow: 0 0 15px #b65aff, 0 0 30px #7e22ce;
-  animation: glow 3s ease-in-out infinite alternate;
+.section-title{
+ color:#d8a7ff;
+ font-size:11px;
+ letter-spacing:3px;
+ margin-bottom:17px;
 }
 
-@keyframes glow {
-  to {
-    text-shadow: 0 0 25px #c084fc, 0 0 45px #9333ea;
-  }
+/* CAROUSEL */
+.carousel{
+ position:relative;
+ width:100%;
+ overflow:hidden;
+ border-radius:17px;
+ touch-action:pan-y;
 }
 
-.verified {
-  color: #c084fc;
-  font-size: 16px;
+.carousel-track{
+ display:flex;
+ transition:transform .55s cubic-bezier(.22,.8,.25,1);
+ will-change:transform;
 }
 
-.bio {
-  margin-top: 12px;
-  color: #c8b6df;
-  font-size: 13px;
-  line-height: 1.8;
+.social-card{
+ flex:0 0 100%;
+ min-width:100%;
+ padding:22px 15px;
+ border:1px solid #c18aff66;
+ border-radius:17px;
+ text-decoration:none;
+ color:white;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ min-height:155px;
+ gap:9px;
+ position:relative;
+ overflow:hidden;
 }
 
-.line {
-  height: 1px;
-  margin: 27px 0;
-  background: linear-gradient(90deg, transparent, #bd70ff, transparent);
-  box-shadow: 0 0 10px #a855f7;
+.social-card:after{
+ content:"";
+ position:absolute;
+ top:0;
+ left:-120%;
+ width:70%;
+ height:100%;
+ background:linear-gradient(90deg,transparent,#ffffff30,transparent);
+ transform:skewX(-25deg);
+ animation:shine 4s infinite;
 }
 
-.label {
-  color: #d8a7ff;
-  font-size: 11px;
-  letter-spacing: 4px;
-  margin-bottom: 20px;
+@keyframes shine{
+ 0%,45%{left:-120%}
+ 75%,100%{left:150%}
 }
 
-/* SOCIAL BUTTONS */
-.link {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  width: 100%;
-  padding: 17px;
-  margin-bottom: 15px;
-  border-radius: 15px;
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: bold;
-  border: 1px solid #c18aff66;
-  transition: .35s;
-  animation: buttonEntrance .8s ease both;
+.social-card .emoji{
+ font-size:35px;
+ filter:drop-shadow(0 0 9px white);
 }
 
-.link:nth-of-type(1) { animation-delay: .3s; }
-.link:nth-of-type(2) { animation-delay: .5s; }
-.link:nth-of-type(3) { animation-delay: .7s; }
-
-@keyframes buttonEntrance {
-  from {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+.social-card strong{
+ font-size:16px;
+ letter-spacing:1px;
 }
 
-.link::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -110%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, #ffffff35, transparent);
-  transform: skewX(-25deg);
-  transition: .7s;
+.social-card small{
+ font-size:11px;
+ color:#eee;
+ opacity:.85;
 }
 
-.link:hover::before {
-  left: 150%;
+.group-card{background:linear-gradient(120deg,#075d4d,#13a881)}
+.channel-card{background:linear-gradient(120deg,#442078,#963cce)}
+.tiktok-card{background:linear-gradient(120deg,#171717,#49324e)}
+.socia-card{background:linear-gradient(120deg,#6423a0,#c044e8)}
+
+.dots{
+ display:flex;
+ justify-content:center;
+ gap:9px;
+ margin-top:15px;
 }
 
-.link:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 0 25px #a855f788;
+.dot{
+ width:8px;
+ height:8px;
+ border:0;
+ border-radius:50%;
+ background:#73558e;
+ transition:.3s;
+ cursor:pointer;
 }
 
-.link:active {
-  transform: scale(.96);
+.dot.active{
+ width:24px;
+ border-radius:10px;
+ background:#d8a7ff;
+ box-shadow:0 0 12px #a855f7;
 }
 
-.channel {
-  background: linear-gradient(110deg, #075d4d, #13a881);
+.carousel-hint{
+ font-size:10px;
+ color:#9581ae;
+ margin-top:10px;
 }
 
-.sociabuzz {
-  background: linear-gradient(110deg, #a34a18, #e58a2d);
+/* PANEL HOSTING */
+.panel-toggle{
+ width:100%;
+ padding:16px;
+ border:1px solid #c084fc;
+ border-radius:14px;
+ background:linear-gradient(110deg,#4c1680,#8b32c9);
+ color:white;
+ font-size:14px;
+ font-weight:bold;
+ cursor:pointer;
+ box-shadow:0 0 18px #a855f755;
 }
 
-.tiktok {
-  background: linear-gradient(110deg, #171717, #393044);
+.panel-list{
+ display:none;
+ margin-top:17px;
+ text-align:left;
 }
 
-.icon {
-  font-size: 23px;
-  filter: drop-shadow(0 0 5px white);
+.panel-list.show{
+ display:block;
+ animation:panelOpen .4s ease;
 }
 
-/* SPARKLES */
-.sparkle {
-  position: fixed;
-  pointer-events: none;
-  z-index: 5;
-  color: #d8a7ff;
-  text-shadow: 0 0 10px #c084fc;
-  animation: sparkle 1.2s ease-out forwards;
+@keyframes panelOpen{
+ from{opacity:0;transform:translateY(12px)}
+ to{opacity:1;transform:translateY(0)}
 }
 
-@keyframes sparkle {
-  0% {
-    opacity: 1;
-    transform: translateY(0) scale(.5) rotate(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-70px) scale(1.5) rotate(180deg);
-  }
+.package{
+ padding:14px;
+ margin-bottom:11px;
+ border:1px solid #a855f755;
+ border-radius:13px;
+ background:linear-gradient(130deg,#211034,#12091f);
 }
 
-/* FOOTER */
-.footer {
-  margin-top: 28px;
-  color: #9581ae;
-  font-size: 10px;
-  letter-spacing: 2px;
-  line-height: 2;
+.package h3{
+ color:#d8a7ff;
+ font-size:14px;
+ margin-bottom:7px;
 }
 
-/* RESPONSIVE */
-@media(max-width:380px) {
-  .container {
-    padding: 25px 16px;
-  }
+.package p{
+ color:#c7b5dc;
+ font-size:12px;
+ line-height:1.9;
+}
 
-  h1 {
-    font-size: 27px;
-  }
+.price{
+ color:white;
+ font-size:17px;
+ font-weight:bold;
+ margin:8px 0;
+ text-shadow:0 0 10px #a855f7;
+}
+
+.order-btn{
+ display:block;
+ text-align:center;
+ text-decoration:none;
+ background:linear-gradient(100deg,#7023b5,#a855f7);
+ color:white;
+ padding:11px;
+ border-radius:9px;
+ font-size:12px;
+ font-weight:bold;
+ margin-top:10px;
+}
+
+.panel-note{
+ color:#bda9d3;
+ font-size:11px;
+ line-height:1.8;
+ margin-top:15px;
+ text-align:center;
+}
+
+.sparkle{
+ position:fixed;
+ pointer-events:none;
+ z-index:5;
+ color:#d8a7ff;
+ text-shadow:0 0 10px #c084fc;
+ animation:sparkle 1.2s ease-out forwards;
+}
+
+@keyframes sparkle{
+ to{opacity:0;transform:translateY(-70px) scale(1.5) rotate(180deg)}
+}
+
+.footer{
+ margin-top:25px;
+ color:#9581ae;
+ font-size:10px;
+ letter-spacing:2px;
+ line-height:2;
+}
+
+@media(max-width:380px){
+ .container{padding:24px 15px}
+ .name{font-size:21px;letter-spacing:1px}
 }
 </style>
 </head>
@@ -351,125 +409,350 @@ h1 {
 
 <div class="container">
 
-  <div class="profile-box">
-    <img class="profile"
-    src="https://c.termai.cc/i114/hnzZ.jpg"
-    alt="TOKITO Profile">
+ <div class="profile-box">
+  <img class="profile"
+   src="https://c.termai.cc/i114/hnzZ.jpg"
+   alt="TOKITO Profile">
+ </div>
+
+ <div class="name-area">
+  <span class="name" id="typedName"></span><span class="cursor">_</span>
+  <div class="subtitle">✦ DIGITAL • GAMING • ROBLOX ✦</div>
+ </div>
+
+ <p class="bio">
+  Welcome to TOKITO X Script Roblox!<br>
+  Gaming • Script • Digital Creator
+ </p>
+
+ <div class="line"></div>
+
+ <p class="section-title">✦ CONNECT WITH ME ✦</p>
+
+ <div class="carousel" id="carousel">
+  <div class="carousel-track" id="carouselTrack">
+
+   <a class="social-card group-card"
+    href="https://chat.whatsapp.com/BdHMrJlyi5h4l5ZVKtehnK?s=cl&p=a&mlu=4&ilr=4&iam=2"
+    target="_blank" rel="noopener">
+    <span class="emoji">👥</span>
+    <strong>GRUP WHATSAPP</strong>
+    <small>Gabung komunitas TOKITO</small>
+   </a>
+
+   <a class="social-card channel-card"
+    href="https://whatsapp.com/channel/0029Vb7UcZKEwEjzVsW53g2K"
+    target="_blank" rel="noopener">
+    <span class="emoji">📢</span>
+    <strong>SALURAN WHATSAPP</strong>
+    <small>Ikuti update terbaru TOKITO</small>
+   </a>
+
+   <a class="social-card tiktok-card"
+    href="https://www.tiktok.com/@tokitotop"
+    target="_blank" rel="noopener">
+    <span class="emoji">♪</span>
+    <strong>TIKTOK</strong>
+    <small>Follow akun TikTok TOKITO</small>
+   </a>
+
+   <a class="social-card socia-card"
+    href="https://sociabuzz.com/rizenm/tribe"
+    target="_blank" rel="noopener">
+    <span class="emoji">💜</span>
+    <strong>SOCIABUZZ</strong>
+    <small>Support TOKITO di Sociabuzz</small>
+   </a>
+
+  </div>
+ </div>
+
+ <div class="dots" id="carouselDots">
+  <button class="dot active" type="button" aria-label="Slide 1" data-slide="0"></button>
+  <button class="dot" type="button" aria-label="Slide 2" data-slide="1"></button>
+  <button class="dot" type="button" aria-label="Slide 3" data-slide="2"></button>
+  <button class="dot" type="button" aria-label="Slide 4" data-slide="3"></button>
+ </div>
+
+ <p class="carousel-hint">GESER KARTU ATAU TUNGGU BERGESER OTOMATIS</p>
+
+ <div class="line"></div>
+
+ <p class="section-title">✦ TOKITO BOT WHATSAPP HOSTING ✦</p>
+
+ <button class="panel-toggle" id="panelButton" type="button">
+  🛒 LIHAT LIST PANEL HOSTING
+ </button>
+
+ <div class="panel-list" id="panelList">
+
+  <div class="package">
+   <h3>📦 PANEL 1GB</h3>
+   <p>RAM: 1GB<br>CPU: 100%<br>DISK: 5GB</p>
+   <div class="price">Rp1.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%201GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
   </div>
 
-  <h1>TOKITO <span class="verified">✦</span></h1>
-
-  <p class="bio">
-    Welcome to my personal page!<br>
-    Digital Creator • Gaming • Technology
-  </p>
-
-  <div class="line"></div>
-
-  <p class="label">✦ MY SOCIAL MEDIA ✦</p>
-
-  <a class="link channel"
-  href="https://whatsapp.com/channel/0029Vb7UcZKEwEjzVsW53g2K"
-  target="_blank" rel="noopener">
-    <span class="icon">📢</span>
-    WhatsApp Channel
-  </a>
-
-  <a class="link sociabuzz"
-  href="https://sociabuzz.com/rizenm/tribe"
-  target="_blank" rel="noopener">
-    <span class="icon">💰</span>
-    Support Me - Sociabuzz
-  </a>
-
-  <a class="link tiktok"
-  href="https://www.tiktok.com/@tokitotop"
-  target="_blank" rel="noopener">
-    <span class="icon">♪</span>
-    Follow My TikTok
-  </a>
-
-  <div class="line"></div>
-
-  <div class="footer">
-    ✦ MADE WITH COSMIC ENERGY ✦<br>
-    © 2026 TOKITO • ALL RIGHTS RESERVED
+  <div class="package">
+   <h3>📦 PANEL 2GB</h3>
+   <p>RAM: 2GB<br>CPU: 110%<br>DISK: 10GB</p>
+   <div class="price">Rp2.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%202GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
   </div>
+
+  <div class="package">
+   <h3>📦 PANEL 3GB</h3>
+   <p>RAM: 3GB<br>CPU: 150%<br>DISK: 15GB</p>
+   <div class="price">Rp3.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%203GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
+  </div>
+
+  <div class="package">
+   <h3>📦 PANEL 4GB</h3>
+   <p>RAM: 4GB<br>CPU: 200%<br>DISK: 20GB</p>
+   <div class="price">Rp4.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%204GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
+  </div>
+
+  <div class="package">
+   <h3>📦 PANEL 5GB</h3>
+   <p>RAM: 5GB<br>CPU: 210%<br>DISK: 25GB</p>
+   <div class="price">Rp5.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%205GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
+  </div>
+
+  <div class="package">
+   <h3>📦 PANEL 6GB</h3>
+   <p>RAM: 6GB<br>CPU: 250%<br>DISK: 30GB</p>
+   <div class="price">Rp6.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%206GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
+  </div>
+
+  <div class="package">
+   <h3>📦 PANEL 7GB</h3>
+   <p>RAM: 7GB<br>CPU: 300%<br>DISK: 35GB</p>
+   <div class="price">Rp7.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%207GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
+  </div>
+
+  <div class="package">
+   <h3>📦 PANEL 8GB</h3>
+   <p>RAM: 8GB<br>CPU: 310%<br>DISK: 40GB</p>
+   <div class="price">Rp9.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%208GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
+  </div>
+
+  <div class="package">
+   <h3>📦 PANEL 9GB</h3>
+   <p>RAM: 9GB<br>CPU: 350%<br>DISK: 45GB</p>
+   <div class="price">Rp10.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%209GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
+  </div>
+
+  <div class="package">
+   <h3>👑 PANEL UNLIMITED</h3>
+   <p>RAM: UNLIMITED<br>CPU: UNLIMITED<br>DISK: UNLIMITED</p>
+   <div class="price">Rp14.000</div>
+   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%20UNLIMITED" target="_blank" rel="noopener">ORDER SEKARANG</a>
+  </div>
+
+  <div class="panel-note">
+   ✦ DETAIL LAYANAN ✦<br>
+   Fresh Panel • Region Singapore<br>
+   Bisa menjalankan bot sendiri<br>
+   Bisa request script bot dari owner<br>
+   Online 24/7 sesuai ketersediaan layanan<br>
+   Masa aktif 15 / 30 hari dan bisa diperpanjang<br><br>
+   <b>ORDER / INFO: 085715836271</b>
+  </div>
+
+ </div>
+
+ <div class="line"></div>
+
+ <div class="footer">
+  ✦ MADE WITH COSMIC ENERGY ✦<br>
+  © 2026 TOKITO X • ALL RIGHTS RESERVED
+ </div>
 
 </div>
 
 <script>
-/* ANIMATED GALAXY STARS */
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
+/* ANIMASI KETIK NAMA */
+(function(){
+ const titleText = "TOKITO X SCRIPT ROBLOX";
+ const typedName = document.getElementById("typedName");
+ let letter = 0;
 
-let stars = [];
+ function typeName(){
+  if(letter < titleText.length){
+   typedName.textContent += titleText.charAt(letter);
+   letter++;
+   setTimeout(typeName,105);
+  }else{
+   setTimeout(function(){
+    typedName.textContent = "";
+    letter = 0;
+    typeName();
+   },3500);
+  }
+ }
+ typeName();
+})();
 
-function resize() {
+/* CAROUSEL 4 KARTU */
+(function(){
+ const track = document.getElementById("carouselTrack");
+ const carousel = document.getElementById("carousel");
+ const dots = document.querySelectorAll("#carouselDots .dot");
+ const cards = track.querySelectorAll(".social-card");
+
+ let currentSlide = 0;
+ let autoSlide = null;
+ let startX = 0;
+
+ function goSlide(index){
+  currentSlide = (index + cards.length) % cards.length;
+  track.style.transform = "translateX(-" + (currentSlide * 100) + "%)";
+
+  dots.forEach(function(dot,i){
+   dot.classList.toggle("active",i === currentSlide);
+  });
+ }
+
+ function startAuto(){
+  clearInterval(autoSlide);
+  autoSlide = setInterval(function(){
+   goSlide(currentSlide + 1);
+  },3500);
+ }
+
+ dots.forEach(function(dot){
+  dot.addEventListener("click",function(){
+   goSlide(Number(dot.dataset.slide));
+   startAuto();
+  });
+ });
+
+ carousel.addEventListener("touchstart",function(event){
+  startX = event.changedTouches[0].screenX;
+  clearInterval(autoSlide);
+ },{passive:true});
+
+ carousel.addEventListener("touchend",function(event){
+  const endX = event.changedTouches[0].screenX;
+  const distance = endX - startX;
+
+  if(Math.abs(distance) > 45){
+   if(distance < 0){
+    goSlide(currentSlide + 1);
+   }else{
+    goSlide(currentSlide - 1);
+   }
+  }
+  startAuto();
+ },{passive:true});
+
+ carousel.addEventListener("mouseenter",function(){
+  clearInterval(autoSlide);
+ });
+
+ carousel.addEventListener("mouseleave",startAuto);
+
+ goSlide(0);
+ startAuto();
+})();
+
+/* BUKA TUTUP PANEL */
+(function(){
+ const button = document.getElementById("panelButton");
+ const panel = document.getElementById("panelList");
+
+ button.addEventListener("click",function(){
+  panel.classList.toggle("show");
+
+  if(panel.classList.contains("show")){
+   button.textContent = "✕ TUTUP LIST PANEL";
+  }else{
+   button.textContent = "🛒 LIHAT LIST PANEL HOSTING";
+  }
+ });
+})();
+
+/* ANIMASI BINTANG */
+(function(){
+ const canvas = document.getElementById("stars");
+ const ctx = canvas.getContext("2d");
+ let stars = [];
+
+ function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
   stars = [];
 
-  for (let i = 0; i < 110; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 1.8 + .3,
-      speed: Math.random() * .35 + .08,
-      alpha: Math.random(),
-      fade: Math.random() * .015 + .003
-    });
+  for(let i=0;i<110;i++){
+   stars.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*1.8+.3,
+    speed:Math.random()*.35+.08,
+    alpha:Math.random(),
+    fade:Math.random()*.015+.003
+   });
   }
-}
+ }
 
-function animateStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+ function animateStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  stars.forEach(star => {
-    star.y -= star.speed;
-    star.alpha += star.fade;
+  stars.forEach(function(star){
+   star.y -= star.speed;
+   star.alpha += star.fade;
 
-    if (star.alpha >= 1 || star.alpha <= .15) {
-      star.fade *= -1;
-    }
+   if(star.alpha >= 1 || star.alpha <= .15){
+    star.fade *= -1;
+   }
 
-    if (star.y < 0) {
-      star.y = canvas.height;
-      star.x = Math.random() * canvas.width;
-    }
+   if(star.y < 0){
+    star.y = canvas.height;
+    star.x = Math.random()*canvas.width;
+   }
 
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(220,180,255,${star.alpha})`;
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = "#a855f7";
-    ctx.fill();
+   ctx.beginPath();
+   ctx.arc(star.x,star.y,star.size,0,Math.PI*2);
+   ctx.fillStyle = "rgba(220,180,255," + star.alpha + ")";
+   ctx.shadowBlur = 10;
+   ctx.shadowColor = "#a855f7";
+   ctx.fill();
   });
 
   requestAnimationFrame(animateStars);
-}
+ }
 
-window.addEventListener("resize", resize);
-resize();
-animateStars();
+ window.addEventListener("resize",resize);
+ resize();
+ animateStars();
+})();
 
-/* TOUCH SPARKLE EFFECT */
-document.addEventListener("pointerdown", function(e) {
-  for (let i = 0; i < 5; i++) {
-    const particle = document.createElement("span");
-    particle.className = "sparkle";
-    particle.textContent = "✦";
-    particle.style.left = (e.clientX + Math.random() * 35 - 17) + "px";
-    particle.style.top = (e.clientY + Math.random() * 35 - 17) + "px";
-    particle.style.fontSize = (10 + Math.random() * 13) + "px";
+/* EFEK SPARKLE */
+document.addEventListener("pointerdown",function(event){
+ for(let i=0;i<5;i++){
+  const particle = document.createElement("span");
+  particle.className = "sparkle";
+  particle.textContent = "✦";
+  particle.style.left = (event.clientX + Math.random()*35 - 17) + "px";
+  particle.style.top = (event.clientY + Math.random()*35 - 17) + "px";
+  particle.style.fontSize = (10 + Math.random()*13) + "px";
 
-    document.body.appendChild(particle);
+  document.body.appendChild(particle);
 
-    setTimeout(() => particle.remove(), 1200);
-  }
+  setTimeout(function(){
+   particle.remove();
+  },1200);
+ }
 });
 </script>
 
 </body>
-</html>
+  </html>
+     
