@@ -1,765 +1,990 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080313">
-<title>TOKITO OFC</title>
+<meta name="theme-color" content="#10051f">
+<title>TOKITO HUB</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
+:root{
+  --purple:#a855f7;
+  --light:#d8b4fe;
+  --dark:#10051f;
+}
+
 body{
- background:#080313;
- color:white;
- font-family:'Segoe UI',Arial,sans-serif;
- min-height:100vh;
- overflow-x:hidden;
+  min-height:100vh;
+  font-family:'Segoe UI',Arial,sans-serif;
+  color:white;
+  background:var(--dark);
+  overflow-x:hidden;
 }
 
-#stars{
- position:fixed;
- inset:0;
- width:100%;
- height:100%;
- pointer-events:none;
- z-index:0;
+.space{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    radial-gradient(ellipse at 20% 20%,#48116c 0%,transparent 40%),
+    radial-gradient(ellipse at 80% 75%,#301052 0%,transparent 40%),
+    linear-gradient(135deg,#080312,#160724,#090315);
 }
 
-.nebula{
- position:fixed;
- width:260px;
- height:260px;
- border-radius:50%;
- filter:blur(100px);
- opacity:.3;
- pointer-events:none;
- z-index:0;
- background:#9b35ff;
+.space:before,.space:after{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%,white 99%,transparent),
+    radial-gradient(2px 2px at 70% 60%,#d8b4fe 99%,transparent),
+    radial-gradient(1px 1px at 40% 80%,white 99%,transparent),
+    radial-gradient(2px 2px at 85% 20%,#c084fc 99%,transparent);
+  background-size:220px 220px;
+  animation:stars 35s linear infinite;
 }
-.n1{top:-100px;left:-100px}
-.n2{bottom:-100px;right:-100px;background:#5414d8}
+
+.space:after{
+  opacity:.4;
+  animation-duration:55s;
+  animation-direction:reverse;
+}
+
+@keyframes stars{
+  to{transform:translateY(220px)}
+}
+
+.glow{
+  position:fixed;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:#9333ea;
+  filter:blur(150px);
+  opacity:.22;
+  z-index:-1;
+  top:30%;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+/* PARTICLES */
+
+.particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  overflow:hidden;
+}
+
+.particle{
+  position:absolute;
+  bottom:-20px;
+  width:3px;
+  height:3px;
+  background:#d8b4fe;
+  border-radius:50%;
+  box-shadow:0 0 10px #c084fc;
+  animation:particleUp linear infinite;
+}
+
+@keyframes particleUp{
+  0%{transform:translateY(0);opacity:0}
+  20%{opacity:1}
+  100%{transform:translateY(-110vh);opacity:0}
+}
 
 /* LOADING SCREEN */
+
 #loading{
- position:fixed;
- inset:0;
- z-index:20;
- background:radial-gradient(circle at center,#24103e,#080313 75%);
- display:flex;
- align-items:center;
- justify-content:center;
- flex-direction:column;
- transition:opacity .8s,visibility .8s;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at center,#30104b 0%,#12051f 55%,#08030f 100%);
+  transition:opacity .9s ease,visibility .9s ease;
 }
 
 #loading.hide{
- opacity:0;
- visibility:hidden;
- pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
 }
 
-.profile-box{
- width:125px;
- height:125px;
- position:relative;
- display:flex;
- align-items:center;
- justify-content:center;
- margin-bottom:28px;
+.loader-content{
+  position:relative;
+  z-index:2;
+  width:90%;
+  max-width:350px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  animation:contentEnter 1s ease;
 }
 
-.profile-box:before{
- content:"";
- position:absolute;
- inset:-9px;
- border:2px dashed #c084fc;
- border-radius:50%;
- animation:rotate 9s linear infinite;
+@keyframes contentEnter{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-.profile-box:after{
- content:"";
- position:absolute;
- inset:-17px;
- border:1px solid #a855f755;
- border-radius:50%;
- animation:pulse 2s infinite;
+.loader-tag{
+  font-size:10px;
+  letter-spacing:5px;
+  color:#c084fc;
+  margin-bottom:35px;
+  animation:tagGlow 2s infinite;
 }
 
-.loading-profile{
- width:110px;
- height:110px;
- border-radius:50%;
- object-fit:cover;
- border:3px solid #c084fc;
- box-shadow:0 0 30px #a855f7;
+@keyframes tagGlow{
+  50%{opacity:.5;text-shadow:0 0 15px #a855f7}
+}
+
+/* ORBIT */
+
+.orbit{
+  position:relative;
+  width:160px;
+  height:160px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:28px;
+}
+
+.orbit:before,.orbit:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border:1px solid #c084fc77;
+  border-radius:50%;
+  animation:rotate 5s linear infinite;
+}
+
+.orbit:after{
+  inset:10px -10px;
+  border-color:#a855f766;
+  transform:rotateX(65deg);
+  animation:rotate 7s linear infinite reverse;
+}
+
+.orbit-ring{
+  position:absolute;
+  inset:-9px;
+  border:2px solid transparent;
+  border-top-color:#d8b4fe;
+  border-bottom-color:#9333ea;
+  border-radius:50%;
+  animation:rotate 2s linear infinite;
+}
+
+.orbit-ring.two{
+  inset:-17px;
+  border-top-color:#9333ea;
+  border-bottom-color:transparent;
+  animation-duration:4s;
+  animation-direction:reverse;
 }
 
 @keyframes rotate{
- to{transform:rotate(360deg)}
+  to{transform:rotate(360deg)}
 }
 
-@keyframes pulse{
- 50%{transform:scale(1.15);opacity:.2}
+.loader-profile{
+  width:115px;
+  height:115px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #c084fc;
+  box-shadow:0 0 20px #a855f7,0 0 55px #7e22ce;
+  animation:profilePulse 2s ease-in-out infinite;
 }
+
+@keyframes profilePulse{
+  50%{
+    box-shadow:0 0 40px #c084fc,0 0 80px #9333ea;
+    transform:scale(1.04);
+  }
+}
+
+/* GLITCH TITLE */
 
 .loading-name{
- font-size:27px;
- font-weight:900;
- letter-spacing:4px;
- color:white;
- text-shadow:0 0 10px #a855f7,0 0 25px #9333ea;
- animation:glitch 2s infinite;
+  position:relative;
+  font-size:29px;
+  font-weight:1000;
+  letter-spacing:5px;
+  color:white;
+  text-shadow:0 0 10px #c084fc,0 0 25px #9333ea;
+  animation:glitch 3s infinite;
+}
+
+.loading-name:before,
+.loading-name:after{
+  content:"TOKITO HUB";
+  position:absolute;
+  inset:0;
+  opacity:.6;
+}
+
+.loading-name:before{
+  color:#d8b4fe;
+  animation:glitchBefore 2s infinite;
+}
+
+.loading-name:after{
+  color:#9333ea;
+  animation:glitchAfter 2s infinite;
+}
+
+@keyframes glitchBefore{
+  0%,90%,100%{clip-path:inset(0);transform:translate(0)}
+  92%{clip-path:inset(20% 0 60%);transform:translate(-3px)}
+  95%{clip-path:inset(60% 0 10%);transform:translate(3px)}
+}
+
+@keyframes glitchAfter{
+  0%,90%,100%{clip-path:inset(0);transform:translate(0)}
+  93%{clip-path:inset(50% 0 20%);transform:translate(3px)}
+  96%{clip-path:inset(10% 0 70%);transform:translate(-3px)}
 }
 
 @keyframes glitch{
- 0%,90%,100%{transform:translate(0)}
- 92%{transform:translate(2px,-2px)}
- 94%{transform:translate(-2px,2px)}
- 96%{transform:translate(2px,1px)}
+  0%,95%,100%{transform:translateX(0)}
+  96%{transform:translateX(2px)}
+  98%{transform:translateX(-2px)}
 }
 
 .loading-sub{
- font-size:9px;
- letter-spacing:4px;
- color:#c084fc;
- margin-top:12px;
+  margin-top:10px;
+  font-size:10px;
+  letter-spacing:4px;
+  color:#c084fc;
 }
 
-.progress-area{
- width:220px;
- margin-top:35px;
-}
+/* LOADING BAR */
 
-.progress-text{
- display:flex;
- justify-content:space-between;
- font-size:10px;
- color:#c084fc;
- margin-bottom:9px;
+.progress-info{
+  width:230px;
+  display:flex;
+  justify-content:space-between;
+  margin-top:35px;
+  font-size:10px;
+  color:#c4a3e9;
+  letter-spacing:1px;
 }
 
 .progress{
- height:5px;
- border-radius:10px;
- background:#28153b;
- overflow:hidden;
+  width:230px;
+  height:5px;
+  margin-top:9px;
+  border-radius:20px;
+  background:#ffffff17;
+  overflow:hidden;
 }
 
-.progress-fill{
- width:0%;
- height:100%;
- background:linear-gradient(90deg,#7e22ce,#d8a7ff);
- box-shadow:0 0 15px #a855f7;
- transition:width .1s;
+.progress-bar{
+  width:0%;
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,#9333ea,#d8b4fe,#fff);
+  box-shadow:0 0 15px #a855f7;
+  transition:width .12s linear;
 }
 
-.loading-footer{
- margin-top:22px;
- color:#73558e;
- font-size:9px;
- letter-spacing:3px;
+.loading-status{
+  margin-top:15px;
+  height:18px;
+  font-size:10px;
+  color:#a78bfa;
+  letter-spacing:2px;
 }
 
-/* MAIN WEBSITE */
+.enter-btn{
+  margin-top:25px;
+  padding:13px 35px;
+  border:1px solid #c084fc;
+  border-radius:30px;
+  background:linear-gradient(120deg,#7e22ce,#a855f7);
+  color:white;
+  font-weight:800;
+  letter-spacing:3px;
+  font-size:11px;
+  box-shadow:0 0 20px #9333ea88;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:.4s;
+}
+
+.enter-btn.ready{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+  animation:enterGlow 2s infinite;
+}
+
+@keyframes enterGlow{
+  50%{box-shadow:0 0 35px #c084fc}
+}
+
+.enter-btn:active{
+  transform:scale(.94);
+}
+
+.loader-footer{
+  position:absolute;
+  bottom:30px;
+  color:#806395;
+  font-size:9px;
+  letter-spacing:3px;
+}
+
+/* MAIN */
+
 #main{
- position:relative;
- z-index:2;
- display:none;
- width:calc(100% - 25px);
- max-width:440px;
- margin:auto;
- padding:35px 0;
- text-align:center;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:35px 18px;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 1s ease;
 }
 
 #main.show{
- display:block;
- animation:pageAppear .8s ease;
+  opacity:1;
+  visibility:visible;
 }
 
-@keyframes pageAppear{
- from{opacity:0;transform:translateY(20px)}
- to{opacity:1;transform:translateY(0)}
+.container{
+  width:100%;
+  max-width:440px;
+  text-align:center;
 }
 
-/* PROFILE ANIMATION */
-.profile-area{
- display:flex;
- justify-content:center;
- align-items:center;
- width:100%;
- margin:0 auto;
- padding:12px 0;
-}
+/* PROFILE */
 
 .main-profile{
- display:block;
- width:105px;
- height:105px;
- margin:0 auto;
- border-radius:50%;
- object-fit:cover;
- border:3px solid #c084fc;
- box-shadow:0 0 20px #a855f7;
- opacity:0;
- transform:scale(.5) rotate(-15deg);
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #c084fc;
+  box-shadow:0 0 20px #a855f7,0 0 55px #7e22ce66;
+  opacity:0;
+  margin-bottom:22px;
 }
 
 #main.show .main-profile{
- animation:
- profileEnter 1s cubic-bezier(.2,.8,.2,1) forwards,
- profileFloat 3s ease-in-out 1s infinite,
- profileGlow 2s ease-in-out 1s infinite alternate;
+  opacity:1;
+  animation:
+    profileEnter 1s ease forwards,
+    profileFloat 4s ease-in-out 1s infinite,
+    profileGlow 3s ease-in-out infinite;
 }
 
 @keyframes profileEnter{
- 0%{
-  opacity:0;
-  transform:scale(.5) rotate(-15deg);
-  filter:blur(8px);
- }
- 70%{
-  opacity:1;
-  transform:scale(1.12) rotate(5deg);
-  filter:blur(0);
- }
- 100%{
-  opacity:1;
-  transform:scale(1) rotate(0);
- }
+  from{transform:scale(.5);filter:blur(8px)}
+  to{transform:scale(1);filter:blur(0)}
 }
 
 @keyframes profileFloat{
- 0%,100%{translate:0 0}
- 50%{translate:0 -9px}
+  0%,100%{translate:0 0}
+  50%{translate:0 -9px}
 }
 
 @keyframes profileGlow{
- from{
-  box-shadow:0 0 15px #a855f7,0 0 25px #9333ea55;
- }
- to{
-  box-shadow:0 0 30px #c084fc,0 0 50px #9333ea;
- }
+  50%{box-shadow:0 0 35px #c084fc,0 0 70px #9333ea}
 }
 
-/* TYPING TITLE */
-.main-title{
- display:block;
- width:100%;
- min-height:45px;
- margin:20px auto 0;
- text-align:center;
- font-size:29px;
- font-weight:900;
- letter-spacing:3px;
- color:white;
- text-shadow:0 0 10px #c084fc,0 0 25px #a855f7;
- overflow-wrap:anywhere;
+/* TITLE */
+
+.title{
+  min-height:48px;
+  font-size:clamp(27px,8vw,39px);
+  font-weight:1000;
+  letter-spacing:3px;
+  color:white;
+  text-shadow:0 0 8px #c084fc,0 0 20px #9333ea,0 0 40px #7e22ce;
 }
 
 .cursor{
- display:inline-block;
- color:#00f7ff;
- font-weight:bold;
- animation:blink .6s steps(2,start) infinite;
- text-shadow:0 0 12px #00f7ff;
+  color:#d8b4fe;
+  animation:blink .7s steps(2) infinite;
 }
 
 @keyframes blink{
- to{visibility:hidden}
+  50%{opacity:0}
 }
 
-.main-sub{
- font-size:10px;
- color:#c084fc;
- letter-spacing:4px;
- margin-top:10px;
-}
-
-.bio{
- font-size:12px;
- color:#bba8d1;
- line-height:1.8;
- margin-top:18px;
+.subtitle{
+  margin-top:8px;
+  font-size:12px;
+  letter-spacing:3px;
+  color:#c4a3e9;
 }
 
 .line{
- height:1px;
- background:linear-gradient(90deg,transparent,#b65aff,transparent);
- margin:25px 0;
+  width:85px;
+  height:3px;
+  margin:22px auto;
+  border-radius:10px;
+  background:linear-gradient(90deg,transparent,#c084fc,transparent);
+  box-shadow:0 0 15px #a855f7;
 }
 
-.section{
- color:#d8a7ff;
- font-size:11px;
- letter-spacing:3px;
- margin-bottom:16px;
+.description{
+  color:#cbb9dc;
+  font-size:13px;
+  line-height:1.8;
+  margin:0 auto 25px;
+  max-width:330px;
 }
 
-/* SOCIAL MEDIA */
+/* SOCIAL */
+
+.social-title{
+  font-size:13px;
+  color:#c084fc;
+  letter-spacing:3px;
+  margin-bottom:15px;
+}
+
+.social-list{
+  display:grid;
+  gap:13px;
+}
+
 .social-card{
- display:block;
- width:100%;
- padding:17px;
- margin-bottom:12px;
- border:1px solid #a855f766;
- border-radius:13px;
- background:linear-gradient(110deg,#211034,#39165b);
- color:white;
- text-decoration:none;
- transition:.3s;
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:16px;
+  border:1px solid #a855f755;
+  border-radius:16px;
+  background:linear-gradient(120deg,#ffffff10,#a855f711);
+  color:white;
+  text-decoration:none;
+  text-align:left;
+  overflow:hidden;
+  transition:.3s ease;
+  backdrop-filter:blur(10px);
+  animation:cardEnter .7s ease both;
 }
 
-.social-card:active{
- transform:scale(.96);
+.social-card:nth-child(2){animation-delay:.15s}
+.social-card:nth-child(3){animation-delay:.3s}
+
+@keyframes cardEnter{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-.social-card strong{
- display:block;
- font-size:14px;
+.social-card:before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:80%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,#ffffff20,transparent);
+  transform:skewX(-20deg);
+  transition:.6s;
 }
 
-.social-card small{
- display:block;
- margin-top:7px;
- color:#cbb5e4;
- font-size:10px;
+.social-card:hover:before{left:130%}
+
+.social-card:hover{
+  transform:translateY(-4px);
+  border-color:#c084fc;
+  box-shadow:0 0 20px #9333ea55;
 }
 
-/* HOSTING PANEL */
-.panel-button{
- width:100%;
- padding:17px;
- border:1px solid #c084fc;
- border-radius:13px;
- background:linear-gradient(110deg,#4c1680,#8b32c9);
- color:white;
- font-size:14px;
- font-weight:bold;
- cursor:pointer;
- box-shadow:0 0 18px #a855f755;
+.social-icon{
+  width:43px;
+  height:43px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:#a855f722;
+  font-size:22px;
+  flex-shrink:0;
 }
 
-.panel-list{
- display:none;
- margin-top:16px;
- text-align:left;
+.social-info{flex:1}
+
+.social-info h3{
+  font-size:14px;
+  margin-bottom:4px;
 }
 
-.panel-list.show{
- display:block;
- animation:pageAppear .4s ease;
+.social-info p{
+  color:#bda9d1;
+  font-size:11px;
 }
 
-.package{
- padding:15px;
- margin-bottom:12px;
- border:1px solid #a855f755;
- border-radius:13px;
- background:linear-gradient(130deg,#211034,#12091f);
-}
-
-.package h3{
- color:#d8a7ff;
- font-size:14px;
- margin-bottom:9px;
-}
-
-.package p{
- color:#c7b5dc;
- font-size:12px;
- line-height:1.9;
-}
-
-.price{
- color:white;
- font-size:19px;
- font-weight:bold;
- margin:10px 0;
- text-shadow:0 0 10px #a855f7;
-}
-
-.order-btn{
- display:block;
- text-align:center;
- text-decoration:none;
- background:linear-gradient(100deg,#7023b5,#a855f7);
- color:white;
- padding:12px;
- border-radius:9px;
- font-size:12px;
- font-weight:bold;
- margin-top:10px;
-}
-
-.panel-note{
- color:#bda9d3;
- font-size:11px;
- line-height:1.9;
- margin-top:16px;
- text-align:center;
+.arrow{
+  color:#c084fc;
+  font-size:20px;
 }
 
 .footer{
- margin-top:28px;
- color:#806a98;
- font-size:9px;
- letter-spacing:3px;
- line-height:2;
+  margin-top:28px;
+  font-size:10px;
+  color:#9276aa;
+  letter-spacing:2px;
 }
 
+/* SOUND BUTTON */
+
+.sound-btn{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:20;
+  width:44px;
+  height:44px;
+  border:1px solid #c084fc88;
+  border-radius:50%;
+  background:#241035dd;
+  color:#d8b4fe;
+  font-size:18px;
+  box-shadow:0 0 15px #9333ea66;
+  cursor:pointer;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(10px);
+}
+
+.sound-btn.visible{display:flex}
+
+.sound-btn:active{transform:scale(.9)}
+
 @media(max-width:380px){
- .main-title{font-size:24px}
- #main{padding-top:25px}
+  .title{font-size:27px}
+  .main-profile{width:110px;height:110px}
+  .loading-name{font-size:25px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="stars"></canvas>
-<div class="nebula n1"></div>
-<div class="nebula n2"></div>
+<div class="space"></div>
+<div class="glow"></div>
+<div class="particles" id="particles"></div>
 
 <!-- LOADING SCREEN -->
+
 <div id="loading">
 
- <div class="profile-box">
-  <img class="loading-profile"
-   src="https://c.termai.cc/i114/hnzZ.jpg"
-   alt="TOKITO Profile">
- </div>
+  <div class="loader-content">
 
- <div class="loading-name">TOKITO OFFICIAL</div>
+    <div class="loader-tag">
+      ✦ WELCOME TO THE FUTURE ✦
+    </div>
 
- <div class="loading-sub">
-  ✦ ULTIMATE GAMING EXPERIENCE ✦
- </div>
+    <div class="orbit">
+      <div class="orbit-ring"></div>
+      <div class="orbit-ring two"></div>
 
- <div class="progress-area">
-  <div class="progress-text">
-   <span>INITIALIZING OFFICIAL</span>
-   <span id="percent">0%</span>
+      <img
+        class="loader-profile"
+        src="https://c.termai.cc/i114/hnzZ.jpg"
+        alt="Tokito Profile"
+      >
+    </div>
+
+    <div class="loading-name">TOKITO HUB</div>
+
+    <div class="loading-sub">
+      NEXT GENERATION EXPERIENCE
+    </div>
+
+    <div class="progress-info">
+      <span id="loadStatus">INITIALIZING</span>
+      <span id="loadPercent">0%</span>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="loading-status" id="statusText">
+      Preparing system...
+    </div>
+
+    <button class="enter-btn" id="enterBtn">
+      ENTER TOKITO HUB →
+    </button>
+
   </div>
-  <div class="progress">
-   <div class="progress-fill" id="fill"></div>
-  </div>
- </div>
 
- <div class="loading-footer">
-  POWERED BY TOKITO SYSTEM
- </div>
+  <div class="loader-footer">
+    TOKITO SYSTEM • 2026
+  </div>
+
 </div>
 
-<!-- MAIN WEBSITE -->
+<!-- MAIN CONTENT -->
+
 <main id="main">
 
- <div class="profile-area">
-  <img class="main-profile"
-   src="https://c.termai.cc/i114/hnzZ.jpg"
-   alt="TOKITO">
- </div>
+  <div class="container">
 
- <div class="main-title">
-  <span id="typedName"></span><span class="cursor">_</span>
- </div>
+    <img
+      class="main-profile"
+      src="https://c.termai.cc/i114/hnzZ.jpg"
+      alt="Tokito Profile"
+    >
 
- <div class="main-sub">
-  DIGITAL • GAMING • ROBLOX
- </div>
+    <h1 class="title">
+      <span id="typedName"></span><span class="cursor">_</span>
+    </h1>
 
- <p class="bio">
-  Welcome to TOKITO OFC!<br>
-  Gaming • Script • Digital Creator
- </p>
+    <p class="subtitle">
+      WELCOME TO MY DIGITAL WORLD
+    </p>
 
- <div class="line"></div>
+    <div class="line"></div>
 
- <div class="section">✦ CONNECT WITH ME ✦</div>
+    <p class="description">
+      Selamat datang di TOKITO HUB.
+      Temukan informasi, update, dan sosial media
+      resmi TOKITO di bawah ini.
+    </p>
 
- <a class="social-card"
- href="https://chat.whatsapp.com/IeQD2MGLDt12lxRh1orucD?s=cl&p=a&mlu=4&ilr=4&iam=2"
- target="_blank" rel="noopener">
-  <strong>👥 GRUP WHATSAPP</strong>
-  <small>Gabung komunitas TOKITO</small>
- </a>
+    <h2 class="social-title">MY SOCIAL MEDIA</h2>
 
- <a class="social-card"
- href="https://whatsapp.com/channel/0029Vb7UcZKEwEjzVsW53g2K"
- target="_blank" rel="noopener">
-  <strong>📢 SALURAN WHATSAPP</strong>
-  <small>Update terbaru TOKITO</small>
- </a>
+    <div class="social-list">
 
- <a class="social-card"
- href="https://www.tiktok.com/@tokitotop"
- target="_blank" rel="noopener">
-  <strong>♪ TIKTOK</strong>
-  <small>Follow akun TOKITO</small>
- </a>
+      <a
+        class="social-card"
+        href="https://whatsapp.com/channel/0029Vb7UcZKEwEjzVsW53g2K"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="social-icon">📢</div>
+        <div class="social-info">
+          <h3>WhatsApp Channel</h3>
+          <p>Ikuti update terbaru TOKITO</p>
+        </div>
+        <span class="arrow">›</span>
+      </a>
 
- <a class="social-card"
- href="https://sociabuzz.com/rizenm/tribe"
- target="_blank" rel="noopener">
-  <strong>💜 SOCIABUZZ</strong>
-  <small>Support TOKITO</small>
- </a>
+      <a
+        class="social-card"
+        href="https://www.tiktok.com/@tokitotop"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="social-icon">♪</div>
+        <div class="social-info">
+          <h3>TikTok</h3>
+          <p>Follow akun TikTok TOKITO</p>
+        </div>
+        <span class="arrow">›</span>
+      </a>
 
- <div class="line"></div>
+      <a
+        class="social-card"
+        href="https://sociabuzz.com/rizenm/tribe"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="social-icon">💜</div>
+        <div class="social-info">
+          <h3>Sociabuzz</h3>
+          <p>Dukung dan support TOKITO</p>
+        </div>
+        <span class="arrow">›</span>
+      </a>
 
- <div class="section">✦ TOKITO BOT WHATSAPP HOSTING ✦</div>
+    </div>
 
- <button class="panel-button" id="panelButton">
-  🛒 LIHAT LIST PANEL HOSTING
- </button>
+    <footer class="footer">
+      © 2026 TOKITO HUB • ALL RIGHTS RESERVED
+    </footer>
 
- <div class="panel-list" id="panelList">
-
-  <div class="package">
-   <h3>📦 PANEL 1GB</h3>
-   <p>RAM: 1GB<br>CPU: 100%<br>DISK: 5GB</p>
-   <div class="price">Rp1.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%201GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
   </div>
-
-  <div class="package">
-   <h3>📦 PANEL 2GB</h3>
-   <p>RAM: 2GB<br>CPU: 110%<br>DISK: 10GB</p>
-   <div class="price">Rp2.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%202GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="package">
-   <h3>📦 PANEL 3GB</h3>
-   <p>RAM: 3GB<br>CPU: 150%<br>DISK: 15GB</p>
-   <div class="price">Rp3.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%203GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="package">
-   <h3>📦 PANEL 4GB</h3>
-   <p>RAM: 4GB<br>CPU: 200%<br>DISK: 20GB</p>
-   <div class="price">Rp4.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%204GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="package">
-   <h3>📦 PANEL 5GB</h3>
-   <p>RAM: 5GB<br>CPU: 210%<br>DISK: 25GB</p>
-   <div class="price">Rp5.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%205GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="package">
-   <h3>📦 PANEL 6GB</h3>
-   <p>RAM: 6GB<br>CPU: 250%<br>DISK: 30GB</p>
-   <div class="price">Rp6.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%206GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="package">
-   <h3>📦 PANEL 7GB</h3>
-   <p>RAM: 7GB<br>CPU: 300%<br>DISK: 35GB</p>
-   <div class="price">Rp7.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%207GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="package">
-   <h3>📦 PANEL 8GB</h3>
-   <p>RAM: 8GB<br>CPU: 310%<br>DISK: 40GB</p>
-   <div class="price">Rp9.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%208GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="package">
-   <h3>📦 PANEL 9GB</h3>
-   <p>RAM: 9GB<br>CPU: 350%<br>DISK: 45GB</p>
-   <div class="price">Rp10.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%209GB" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="package">
-   <h3>👑 PANEL UNLIMITED</h3>
-   <p>RAM: UNLIMITED<br>CPU: UNLIMITED<br>DISK: UNLIMITED</p>
-   <div class="price">Rp14.000</div>
-   <a class="order-btn" href="https://wa.me/6285715836271?text=Halo%20TOKITO,%20saya%20mau%20order%20panel%20UNLIMITED" target="_blank" rel="noopener">ORDER SEKARANG</a>
-  </div>
-
-  <div class="panel-note">
-   ✦ DETAIL LAYANAN ✦<br>
-   Fresh Panel • Region Singapore<br>
-   Bisa menjalankan bot sendiri<br>
-   Bisa request script bot dari owner<br>
-   Online 24/7 sesuai ketersediaan layanan<br>
-   Masa aktif 15 / 30 hari dan bisa diperpanjang<br><br>
-   <b>ORDER / INFO: 085715836271</b>
-  </div>
-
- </div>
-
- <div class="line"></div>
-
- <div class="footer">
-  ✦ MADE WITH COSMIC ENERGY ✦<br>
-  © 2026 TOKITO OFFICIAL • ALL RIGHTS RESERVED
- </div>
 
 </main>
 
-<script>
-/* LOADING */
-let progress = 0;
+<!-- SOUND BUTTON -->
 
-const fill = document.getElementById("fill");
-const percent = document.getElementById("percent");
+<button class="sound-btn" id="soundBtn" aria-label="Toggle sound">
+  🔊
+</button>
+
+<script>
 const loading = document.getElementById("loading");
 const main = document.getElementById("main");
+const enterBtn = document.getElementById("enterBtn");
 
-const loadTimer = setInterval(function(){
+let audioContext = null;
+let masterGain = null;
+let soundEnabled = true;
+let musicStarted = false;
 
- progress += Math.floor(Math.random()*4)+1;
+/* PARTICLES */
 
- if(progress >= 100){
-  progress = 100;
-  clearInterval(loadTimer);
+const particles = document.getElementById("particles");
 
-  setTimeout(function(){
-   loading.classList.add("hide");
-   main.classList.add("show");
-
-   // Animasi nama dimulai setelah halaman tampil
-   setTimeout(typeName,700);
-
-  },700);
- }
-
- fill.style.width = progress + "%";
- percent.textContent = progress + "%";
-
-},100);
-
-
-/* TYPEWRITER LOOP */
-function typeName(){
-
- const title = "TOKITO OFFICIAL";
- const element = document.getElementById("typedName");
-
- if(!element) return;
-
- let index = 0;
- let deleting = false;
-
- function typing(){
-
-  if(!deleting){
-
-   element.textContent = title.substring(0,index+1);
-   index++;
-
-   if(index >= title.length){
-    deleting = true;
-    setTimeout(typing,1200);
-    return;
-   }
-
-   setTimeout(typing,160);
-
-  }else{
-
-   element.textContent = title.substring(0,index-1);
-   index--;
-
-   if(index <= 0){
-    deleting = false;
-    setTimeout(typing,500);
-    return;
-   }
-
-   setTimeout(typing,90);
-  }
- }
-
- typing();
+for(let i=0;i<35;i++){
+  const p=document.createElement("span");
+  p.className="particle";
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=(5+Math.random()*9)+"s";
+  p.style.animationDelay=(Math.random()*8)+"s";
+  p.style.opacity=Math.random();
+  particles.appendChild(p);
 }
 
+/* LOADING PROGRESS */
 
-/* TOGGLE PANEL */
-const panelButton = document.getElementById("panelButton");
-const panelList = document.getElementById("panelList");
+const progressBar = document.getElementById("progressBar");
+const loadPercent = document.getElementById("loadPercent");
+const loadStatus = document.getElementById("loadStatus");
+const statusText = document.getElementById("statusText");
 
-panelButton.addEventListener("click",function(){
+const messages=[
+  "Preparing system...",
+  "Loading Tokito profile...",
+  "Connecting digital world...",
+  "Initializing interface...",
+  "Almost ready..."
+];
 
- panelList.classList.toggle("show");
+let progress=0;
 
- panelButton.textContent =
- panelList.classList.contains("show")
- ? "✕ TUTUP LIST PANEL"
- : "🛒 LIHAT LIST PANEL";
+const loadingInterval=setInterval(()=>{
+  progress += Math.random()*3+1;
+
+  if(progress>=100){
+    progress=100;
+    clearInterval(loadingInterval);
+
+    loadStatus.textContent="COMPLETE";
+    statusText.textContent="System ready. Welcome!";
+    enterBtn.classList.add("ready");
+  }else{
+    const stage=Math.min(
+      messages.length-1,
+      Math.floor(progress/21)
+    );
+
+    loadStatus.textContent="LOADING";
+    statusText.textContent=messages[stage];
+  }
+
+  progressBar.style.width=progress+"%";
+  loadPercent.textContent=Math.floor(progress)+"%";
+
+},90);
+
+/* AUDIO SYSTEM */
+
+function initAudio(){
+
+  if(!audioContext){
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+
+    if(!AudioCtx) return;
+
+    audioContext=new AudioCtx();
+
+    masterGain=audioContext.createGain();
+    masterGain.gain.value=0.12;
+    masterGain.connect(audioContext.destination);
+  }
+
+  if(audioContext.state==="suspended"){
+    audioContext.resume();
+  }
+}
+
+/* AMBIENT MUSIC */
+
+function startMusic(){
+
+  initAudio();
+
+  if(!audioContext||musicStarted) return;
+
+  musicStarted=true;
+
+  const frequencies=[110,164.81,220];
+
+  frequencies.forEach((freq,index)=>{
+
+    const osc=audioContext.createOscillator();
+    const gain=audioContext.createGain();
+
+    osc.type="sine";
+    osc.frequency.value=freq;
+
+    gain.gain.value=0.025/(index+1);
+
+    osc.connect(gain);
+    gain.connect(masterGain);
+
+    osc.start();
+
+  });
+}
+
+/* SOUND EFFECT */
+
+function playClick(){
+
+  if(!soundEnabled||!audioContext) return;
+
+  const osc=audioContext.createOscillator();
+  const gain=audioContext.createGain();
+
+  const now=audioContext.currentTime;
+
+  osc.type="sine";
+  osc.frequency.setValueAtTime(650,now);
+  osc.frequency.exponentialRampToValueAtTime(300,now+0.12);
+
+  gain.gain.setValueAtTime(0.15,now);
+  gain.gain.exponentialRampToValueAtTime(0.001,now+0.15);
+
+  osc.connect(gain);
+  gain.connect(masterGain);
+
+  osc.start(now);
+  osc.stop(now+0.16);
+}
+
+/* ENTER WEBSITE */
+
+enterBtn.addEventListener("click",async()=>{
+
+  if(progress<100) return;
+
+  initAudio();
+
+  if(soundEnabled){
+    startMusic();
+    playClick();
+  }
+
+  loading.classList.add("hide");
+  main.classList.add("show");
+
+  document.getElementById("soundBtn").classList.add("visible");
+
+  setTimeout(typeName,900);
 
 });
 
+/* SOUND TOGGLE */
 
-/* GALAXY STARS */
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
+const soundBtn=document.getElementById("soundBtn");
 
-let stars = [];
+soundBtn.addEventListener("click",()=>{
 
-function resize(){
+  initAudio();
 
- canvas.width = window.innerWidth;
- canvas.height = window.innerHeight;
+  soundEnabled=!soundEnabled;
 
- stars = [];
-
- for(let i=0;i<100;i++){
-  stars.push({
-   x:Math.random()*canvas.width,
-   y:Math.random()*canvas.height,
-   size:Math.random()*1.5+.3,
-   speed:Math.random()*.4+.1,
-   alpha:Math.random()
-  });
- }
-}
-
-function animate(){
-
- ctx.clearRect(0,0,canvas.width,canvas.height);
-
- stars.forEach(function(s){
-
-  s.y -= s.speed;
-  s.alpha += .01;
-
-  if(s.alpha > 1) s.alpha = .2;
-
-  if(s.y < 0){
-   s.y = canvas.height;
-   s.x = Math.random()*canvas.width;
+  if(masterGain){
+    masterGain.gain.setTargetAtTime(
+      soundEnabled?0.12:0,
+      audioContext.currentTime,
+      0.1
+    );
   }
 
-  ctx.beginPath();
-  ctx.arc(s.x,s.y,s.size,0,Math.PI*2);
-  ctx.fillStyle="rgba(220,180,255,"+s.alpha+")";
-  ctx.shadowBlur=10;
-  ctx.shadowColor="#a855f7";
-  ctx.fill();
+  soundBtn.textContent=soundEnabled?"🔊":"🔇";
 
- });
+  if(soundEnabled){
+    startMusic();
+    playClick();
+  }
 
- requestAnimationFrame(animate);
+});
+
+/* TYPEWRITER ANIMATION */
+
+function typeName(){
+
+  const title="TOKITO HUB";
+  const element=document.getElementById("typedName");
+
+  let index=0;
+  let deleting=false;
+
+  function typing(){
+
+    if(!deleting){
+
+      element.textContent=title.substring(0,index+1);
+      index++;
+
+      if(index>=title.length){
+        deleting=true;
+        setTimeout(typing,1500);
+        return;
+      }
+
+      setTimeout(typing,160);
+
+    }else{
+
+      element.textContent=title.substring(0,index-1);
+      index--;
+
+      if(index<=0){
+        deleting=false;
+        setTimeout(typing,500);
+        return;
+      }
+
+      setTimeout(typing,90);
+
+    }
+
+  }
+
+  typing();
 }
 
-window.addEventListener("resize",resize);
-resize();
-animate();
+/* SOCIAL CLICK SOUND */
+
+document.querySelectorAll(".social-card").forEach(card=>{
+  card.addEventListener("click",()=>{
+    playClick();
+  });
+});
+
 </script>
 
 </body>
-    </html>
-    
+ </html>
+ 
